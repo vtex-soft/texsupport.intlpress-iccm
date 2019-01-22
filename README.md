@@ -1,4 +1,4 @@
-# LaTeX author support for the International Press journal *Notices of the International Congress of Chinese Mathematicians* (*ICCM Notices*)
+# International Press journal ICCM Notices author support
 
 ## Table of Contents
 
