@@ -15,7 +15,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{iccmpdfwf}
-    [2019/01/25 v3.1.1, driver class for journal ICCM]
+    [2019/01/25 v2.5, driver class for journal ICCM]
 
 %%  CLASS FILE CONTENT:
 %%  - VTeX SETUP
@@ -211,7 +211,6 @@
 \def\copyright@size{\small\bfseries}
 \def\pagenumber@size{\small\upshape}
 \def\thebibliography@size{\footnotesize}
-
 %%
 %%  ======= PREAMBLE =======
 %%
@@ -286,6 +285,7 @@
     }
 
 \let\proof@id@line\relax
+
 
 \def\fmt@copyright@info#1#2#3{%
     \vtop to0\p@{%
@@ -408,62 +408,88 @@
 \def\accepted@prefix{; accepted~}
 \def\accepted@postfix{}
 
-\def\received#1{\def\@tempa{#1}\ifx\@tempa\@empty\else\gdef\@received{#1}\gdef\history@exist{1}\fi}
+\def\received#1{%
+    \def\@tempa{#1}%
+    \ifx\@tempa\@empty
+    \else
+        \gdef\@received{#1}%
+        \gdef\history@exist{1}%
+    \fi
+    }
 \def\@received{\@nil}
-\def\revised#1{\def\@tempa{#1}\ifx\@tempa\@empty\else\gdef\@revised{#1}\gdef\history@exist{1}\fi}
+\def\revised#1{%
+    \def\@tempa{#1}%
+    \ifx\@tempa\@empty
+    \else
+        \gdef\@revised{#1}%
+        \gdef\history@exist{1}%
+    \fi
+    }
 \def\@revised{\@nil}
-\def\accepted#1{\def\@tempa{#1}\ifx\@tempa\@empty\else\gdef\@accepted{#1}\gdef\history@exist{1}\fi}
+\def\accepted#1{%
+    \def\@tempa{#1}%
+    \ifx\@tempa\@empty
+    \else
+        \gdef\@accepted{#1}%
+        \gdef\history@exist{1}%
+    \fi
+    }
 \def\@accepted{\@nil}
 
 \def\empty@data{\@nil}
 
 \def\history@fmt{%
-  \ifcase\history@exist\else%
-  \bgroup
-    \nobreak%
-    \vskip\history@skip%
-    \nobreak%
-    \history@style%
-    \history@size%
-    \leavevmode
-    \history@prefix
-    \ifx\@received\empty@data \else
-      \received@prefix\@received \received@postfix%
+    \ifcase\history@exist
+    \else
+        \bgroup
+            \nobreak
+            \vskip\history@skip
+            \nobreak
+            \history@style
+            \history@size
+            \leavevmode
+            \history@prefix
+            \ifx\@received\empty@data
+            \else
+                \received@prefix\@received \received@postfix
+            \fi
+            \ifx\@revised\empty@data
+            \else
+                \revised@prefix\@revised \revised@postfix
+            \fi
+            \ifx\@accepted\empty@data
+            \else
+                \accepted@prefix\@accepted \accepted@postfix
+            \fi
+            \history@postfix\par
+        \egroup
+        \gdef\history@exist{0}
     \fi
-    \ifx\@revised\empty@data \else
-      \revised@prefix\@revised \revised@postfix%
-    \fi
-    \ifx\@accepted\empty@data \else
-      \accepted@prefix\@accepted \accepted@postfix%
-    \fi
-  \history@postfix\par%
-  \egroup%
-  \gdef\history@exist{0}
-\fi
-}
+    }
 
-% ST makrosas savo numeracijos sistemos sukurimui
-\def\setvaluelist#1#2{\@tempcnta=0\relax
-  \@for\@curr@val:=#2\do{%
-     \advance\@tempcnta by1\relax
-     \expandafter\protected@xdef\csname #1@item@\the\@tempcnta\endcsname{\@curr@val}%
-     }%
-     \expandafter\protected@xdef\csname #1@item@0\endcsname{\the\@tempcnta}%
-}
+\def\setvaluelist#1#2{%
+    \@tempcnta=0\relax
+    \@for\@curr@val:=#2\do{%
+        \advance\@tempcnta by1\relax
+        \expandafter\protected@xdef\csname #1@item@\the\@tempcnta\endcsname{\@curr@val}%
+        }%
+    \expandafter\protected@xdef\csname #1@item@0\endcsname{\the\@tempcnta}%
+    }
 \xdef\getitemvalue#1#2{\noexpand\csname #1@item@#2\endcsname}
 
 \def\sday#1{#1}
-\def\smonth#1{\@ifundefined{month@item@#1}%
-     {\@latex@error{Nera tokio menesio, kurio numeris #1!}{??}}%
-     {\getitemvalue{month}{#1}}%
-  }%
+\def\smonth#1{%
+    \@ifundefined{month@item@#1}%
+                 {\@latex@error{The `#1' month does not exist!}{??}}%
+                 {\getitemvalue{month}{#1}}%
+    }%
 \def\syear#1{#1}
 \setvaluelist{month}{January,February,March,April,May,June,July,August,September,October,November,December}
 
 \def\set@history@fmt{%
-  \let\sv@thebibliography\thebibliography
-  \def\thebibliography{\history@fmt\sv@thebibliography}%
-}
+    \let\sv@thebibliography\thebibliography
+    \def\thebibliography{\history@fmt\sv@thebibliography}%
+    }
 
 \AtBeginDocument{\set@history@fmt}
 %%
@@ -660,13 +686,6 @@
 
 \gdef\keyword{\@ifnextchar[{\@keyword}{\@keyword[class=KWD]}}
 
-\def\sep@key@value#1=#2/?/#3{\expandafter\def\csname#3@#1\endcsname{#2}}
-\def\do@option@list#1#2{%
-    \@for\curr@option:={#2}\do{%
-        \expandafter\sep@key@value\curr@option/?/{#1}\relax
-        }%
-    }
-
 \gdef\@keyword[#1]{%
     \do@option@list{keyword}{#1}%
     \def\keyword@name{\csname keyword@\keyword@class\endcsname}%
@@ -688,6 +707,13 @@
 \def\endkeyword{%
         \unskip.\par\global\pre@kwd@depth\prevdepth
     \egroup
+    }
+
+\def\sep@key@value#1=#2/?/#3{\expandafter\def\csname#3@#1\endcsname{#2}}
+\def\do@option@list#1#2{%
+    \@for\curr@option:={#2}\do{%
+        \expandafter\sep@key@value\curr@option/?/{#1}\relax
+        }%
     }
 
 \def\keyword@fmt{%
@@ -872,7 +898,6 @@
 \def\subsubsection@numbersep{}
 \def\paragraph@numbersep{.}
 \def\subparagraph@numbersep{.}
-
 %%
 %%  ======= APPENDIX =======
 %%
@@ -1018,32 +1043,29 @@
 %%
 \def\set@natbib{%
     \let\bibfont\thebibliography@size
-    \setlength\bibsep{0\p@}%
+    \setlength\bibsep{\z@}%
     }
-
 \def\load@natbib@@{%
     \if@numbered@bibliography
-        \PassOptionsToPackage{numbers,square}{natbib}
+        \PassOptionsToPackage{numbers,square}{natbib}%
     \fi
-    \if@load@natbib@
-        \RequirePackage{natbib}%
-    \else 
-        \let\xxx@thebibliography\thebibliography
-        \def\thebibliography{\thebibliography@size\xxx@thebibliography}%
-        \g@addto@macro\@openbib@code{\itemsep\z@}%
-    \fi
-    \AtBeginDocument{\@ifpackageloaded{natbib}{\set@natbib}{}}%
+    \RequirePackage{natbib}%
     }
 
-\@ifundefined{load@natbib}{\let\load@natbib\load@natbib@@}{}    	
+\@ifundefined{load@natbib}{\let\load@natbib\load@natbib@@}{}
+
 \if@load@natbib@
     \load@natbib
+\else
+    \let\xxx@thebibliography\thebibliography
+    \def\thebibliography{\thebibliography@size\xxx@thebibliography}%
+    \g@addto@macro\@openbib@code{\itemsep\z@}%
 \fi
+\AtBeginDocument{\@ifpackageloaded{natbib}{\set@natbib}{}}%
 
 \RequirePackage{flushend}
 %% Activating `keeplastbox' option, which was not present in TL2010 style version
 \@ifpackagelater{flushend}{2015/04/08}{\global\@remove@lastbox@at@balancingfalse}{}
-
 %%
 %%  ======= SMART \MR =======
 %%
@@ -1070,7 +1092,6 @@
 \RequirePackage{xcolor}
 
 \@ifundefined{ifwww}{\newif\ifwww\wwwtrue}{}
-
 \ifwww
     %%  blue
     \definecolor{linkcolor}{rgb}{0 0 1}
@@ -1150,6 +1171,7 @@
 \pagestyle{copyright}
 
 \@ifundefined{AtEndAfterFileList}{}{\AtEndAfterFileList{}}
+
 \normalsize
 
 \endinput
