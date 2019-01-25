@@ -15,7 +15,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{iccmpdfwf}
-    [2019/01/22 v3.0, driver class for journal ICCM]
+    [2019/01/25 v3.1.1, driver class for journal ICCM]
 
 %%  CLASS FILE CONTENT:
 %%  - VTeX SETUP
@@ -38,6 +38,7 @@
 %%  - TABLE OF CONTENTS
 %%  - LIST ENVIRONMENTS
 %%  - FLOATS
+%%  - MATH
 %%  - THE BIBLIOGRAPHY
 %%  - SMART \verb|\MR|
 %%  - REFERENCES
@@ -54,19 +55,19 @@
 
 \RequirePackage{etoolbox}
 
-    \@ifundefined{pdfoutput}{%
-        \RequirePackage{luatex85}%
-        \newdimen\pdfeachlineheight
-        \newdimen\pdfeachlinedepth
-        \newdimen\pdflastlinedepth
-        \newdimen\pdffirstlineheight
-        \newdimen\pdfignoreddimen
-        \edef\pdfpkfixeddpi {\pdfvariable pkfixeddpi}%
-        \edef\pdfignoreunknownimages {\pdfvariable ignoreunknownimages}%
-        \edef\pdfomitcidset {\pdfvariable omitcidset}%
-        \edef\pdfxformmargin {\pdfvariable xformmargin}%
-        \edef\pdfsuppressoptionalinfo {\pdfvariable suppressoptionalinfo }%
-        \edef\pdftrailerid {\pdfvariable trailerid }%
+\@ifundefined{pdfoutput}{%
+    \RequirePackage{luatex85}%
+    \newdimen\pdfeachlineheight
+    \newdimen\pdfeachlinedepth
+    \newdimen\pdflastlinedepth
+    \newdimen\pdffirstlineheight
+    \newdimen\pdfignoreddimen
+    \edef\pdfpkfixeddpi {\pdfvariable pkfixeddpi}%
+    \edef\pdfignoreunknownimages {\pdfvariable ignoreunknownimages}%
+    \edef\pdfomitcidset {\pdfvariable omitcidset}%
+    \edef\pdfxformmargin {\pdfvariable xformmargin}%
+    \edef\pdfsuppressoptionalinfo {\pdfvariable suppressoptionalinfo }%
+    \edef\pdftrailerid {\pdfvariable trailerid }%
     }{}
 
 \newif\if@load@natbib@\@load@natbib@true
@@ -78,6 +79,9 @@
 \newif\if@numbered@section\@numbered@sectionfalse
 \DeclareOption{numsec}{\@numbered@sectiontrue}
 
+\newif\if@section@eqno\@section@eqnofalse
+\DeclareOption{eqsecno}{\@section@eqnotrue}
+
 \PassOptionsToClass{letter,10pt,twoside,twocolumn,leqno}{article}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions*
@@ -86,6 +90,8 @@
 %%
 %%  ======= PAGE LAYOUT =======
 %%
+\RequirePackage{cuted}
+
 \def\trim@width      {8.5in}
 \def\trim@height     {11in}
 \def\@page@headheight{12\p@}
@@ -154,9 +160,6 @@
 \renewcommand\LARGE{\@setfontsize\LARGE{17.8}{23.2}}
 \renewcommand\huge{\@setfontsize\huge{21}{26.25}}
 \renewcommand\Huge{\@setfontsize\Huge{26.25}{31.5}}
-
-\PassOptionsToPackage{leqno}{amsmath}
-\AtBeginDocument{\@ifpackageloaded{amsmath}{\allowdisplaybreaks}{}}
 
 \@input{iccm-vtex.cfg}
 
@@ -651,7 +654,7 @@
 
 \def\keyword@AMS{AMS 2000 subject classifications:}
 \def\keyword@MSC{MSC 2010 subject classifications:}
-\def\keyword@MSC2010{MSC 2010 subject classifications:}
+\expandafter\def\csname keyword@MSC2010\endcsname{MSC 2010 subject classifications:}
 \def\keyword@KWD{Keywords and phrases:}
 \def\keyword@class{KWD}
 
@@ -998,6 +1001,18 @@
     \small
     \centering
     }
+%%
+%%  ======= MATH =======
+%%
+\PassOptionsToPackage{leqno}{amsmath}
+\AtBeginDocument{\@ifpackageloaded{amsmath}{\allowdisplaybreaks}{}}
+\if@section@eqno
+   \AtBeginDocument{%
+       \@ifpackageloaded{amsmath}
+                        {\numberwithin{equation}{section}}
+                        {\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}}%
+       }
+\fi
 %%
 %%  ======= THE BIBLIOGRAPHY =======
 %%
