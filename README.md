@@ -53,7 +53,7 @@ In case *Chinese* symbols are used in the manuscript:
   for Chinese typesetting should be installed in TeX system and used in the following way:
     ```latex
     \newfontfamily\textzhfamily{FandolHei-Regular.otf}
-    \def\textzh#1{{\textzhfamily #1}}
+    \def\textzh#1{\bgroup\textzhfamily #1\egroup}
     \textzh{林振峰}
     ```
 * `luatex` engine should be used to produce `PDF` file.
@@ -92,32 +92,32 @@ The preamble of your LaTeX document should look like this:
 
 \begin{document}
 
-    \begin{frontmatter}
+\begin{frontmatter}
 
-        \title{Title%
-               \protect\thanks{Footnote to the title with the `thankstext' command.}}
-        \runtitle{Title}
+\title{Title%
+       \protect\thanks{Footnote to the title with the `thankstext' command.}}
+\runtitle{Title}
 
-        \author{by First Author}%
-        \thanks{Department, University of the First Author, Country
-                \hfill\break E-mail: e-mail1@mail.com},
-        \author{Second Author}%
-        \thanks{Department, University of the Second Author, Country
-                \hfill\break E-mail: e-mail2@mail.com},
-        and
-        \author{Third Author}%
-        \thanks{Department, University of the Third Author, Country
-                \hfill\break E-mail: e-mail3@mail.com}
+\author{by First Author}%
+\thanks{Department, University of the First Author, Country
+        \hfill\break E-mail: e-mail1@mail.com},
+\author{Second Author}%
+\thanks{Department, University of the Second Author, Country
+        \hfill\break E-mail: e-mail2@mail.com},
+and
+\author{Third Author}%
+\thanks{Department, University of the Third Author, Country
+        \hfill\break E-mail: e-mail3@mail.com}
 
-        \runauthor{F. Author et al.}
+\runauthor{F. Author et al.}
 
-        \begin{abstract}
-            ...
-        \end{abstract}
+\begin{abstract}
+...
+\end{abstract}
 
-    \end{frontmatter}
+\end{frontmatter}
 
-    Your publication content
+Your publication content
 
 \end{document}
 ```
