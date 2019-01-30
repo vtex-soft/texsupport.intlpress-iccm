@@ -1,11 +1,14 @@
-%% Options: [authoryear,nonatbib,numsec,eqsecno]
+%%  Template for the submittion to:
+%%    Notices of the International Congress of Chinese Mathematicians [iccm]
+
+%%  Options: [authoryear,nonatbib,numsec,eqsecno]
 \documentclass{iccmpdfwf}
 
 \RequirePackage{amsthm,amsmath}
 
-%% If you whant to typset utf8 characters directly,
-%% use lualatex and uncomment lines below 
-%% from here
+%%  If you whant to typset utf8 characters directly,
+%%  use lualatex and uncomment lines below 
+%%  from here
 
 %\usepackage{fontspec}
 %\setmainfont[
@@ -16,23 +19,14 @@
 %  BoldItalicFont=*-bolditalic,
 %  ]{texgyrepagella}
 
-%% till here
-%% and comment the following line
+%%  till here.
+%%  And comment the following line
 \RequirePackage{tgpagella}
-
-
-% settings
-\pubyear{2019}
-\pubmonth{January}
-\volume{0}
-\issue{0}
-\firstpage{1}
-\lastpage{1}
 
 \startlocaldefs
 % For chinese symbols use \textzh{...}
 \@ifpackageloaded{fontspec}{%
-    %% Please make sure that `Fandol' fonts exist in TeX system 
+    %% Please make sure that `Fandol' fonts exist in TeX system
     %% or use some alternative font for Chinese symbols
     \newfontfamily\textzhfamily{FandolHei-Regular.otf}%
     \def\textzh#1{{\textzhfamily #1}}%
@@ -43,6 +37,14 @@
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[section]
 \endlocaldefs
+
+%%  Settings
+\pubyear{2019}
+\pubmonth{January}
+\volume{0}
+\issue{0}
+\firstpage{1}
+\lastpage{1}
 
 \begin{document}
 
@@ -57,7 +59,7 @@
 and
 \author{}\thanks{ \hfill\break E-mail: }
 
-% For the same footnote symbol:
+%%  For the same footnote symbol:
 %\author{by Author1}\thanksmark[\textdagger]{T1},
 %\author{Author2}\thanksmark[\textdagger]{T1}, and
 %\author{Author3}\thanksmark[\textdagger]{T1}
@@ -65,47 +67,42 @@ and
 
 \runauthor{}
 
-%\received{\sday{3} \smonth{1} \syear{2015}}
+%%  History:
+%\received{\sday{3} \smonth{1} \syear{2018}}
+
+\end{frontmatter}
 
 %\tableofcontents
-\end{frontmatter}
 
 \section{}\label{}
 
-%% Table %%
-%%%%%%%%%%%%%%%%%%%%%%
+%%  Table
 %\begin{table}
 %\caption{}\label{}
 %\end{table}
 
-%% Figure %%
-%%%%%%%%%%%%%%%%%%%%%%
+%%  Figure
 %\begin{figure}[t]
 %\includegraphics{}
 %\caption{}\label{}
 %\end{figure}
 
-%% Theorem %%
-%%%%%%%%%%%%%%%%%%%%%%
+%%  Theorem
 %%\begin{thm}[]\label{} Theorem
 %%\end{thm}
 
-%%  Acknowledgements %%
-%%%%%%%%%%%%%%%%%%%%%%
+%%  Acknowledgements
 %\section*{Acknowledgments}
  
-%% Appendices %%
-%%%%%%%%%%%%%%%%%%%%%%
+%%  Appendices
 %\appendix
 %\section{Appendix Section}
 
-%% Bibliography %%
-%%%%%%%%%%%%%%%%%%%%%%
-\begin{thebibliography}{}
+%%  The bibliography
+\begin{thebibliography}{9}
+%%  Use \bibitem{r1} or \bibitem[Surname(2010)]{r1} (for authoryear case)
 
-\bibitem[ ()]{r1}
-
-\bibitem[ ()]{r2}
+\bibitem{}
 
 \end{thebibliography}
 

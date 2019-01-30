@@ -1,12 +1,12 @@
-%% it's a sample file!
-%% please use corressponding template
+%%  It's a sample file!
+%%  Please use corressponding template
 
-\documentclass[authoryear]{iccmpdfwf}
+\documentclass{iccmpdfwf}
 
-\RequirePackage{amsthm,amsmath}
+\RequirePackage{amsthm,amsmath,amssymb}
 
-%% if you don't use lualatex comment lines below
-%% from here
+%%  If you don't use lualatex comment lines below
+%%  from here
 \usepackage{fontspec}
 \setmainfont[
   Extension=.otf,
@@ -15,23 +15,15 @@
   ItalicFont=*-italic,
   BoldItalicFont=*-bolditalic,
   ]{texgyrepagella}
-%% till here
-%% use the following line instead:
+%%  till here.
+%%  Use the following line instead:
 %\usepackage{tgpagella}
 
-% settings
-\pubyear{2019}
-\pubmonth{January}
-\volume{0}
-\issue{0}
-\firstpage{1}
-\lastpage{8}
-
 \startlocaldefs
-% For chinese symbols use \textzh{...}
+%%  For chinese symbols use \textzh{...}
 \@ifpackageloaded{fontspec}{%
-    %% Please make sure that `Fandol' fonts exist in TeX system 
-    %% or use some alternative font for Chinese symbols
+    %%  Please make sure that `Fandol' fonts exist in TeX system
+    %%  or use some alternative font for Chinese symbols
     \newfontfamily\textzhfamily{FandolHei-Regular.otf}%
     \def\textzh#1{{\textzhfamily #1}}%
     }{%
@@ -40,7 +32,18 @@
 
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[section]
+\def\SM#1#2{\sum_{#1\in #2}}
+\def\FL#1{\left\lfloor #1 \right\rfloor}
+\def\FR#1#2{{\frac{#1}{#2}}}
 \endlocaldefs
+
+%%  Settings
+\pubyear{2019}
+\pubmonth{January}
+\volume{0}
+\issue{0}
+\firstpage{1}
+\lastpage{8}
 
 \begin{document}
 \begin{frontmatter}
@@ -96,10 +99,10 @@ of  a paragraph.
 
 Since any number of consecutive spaces are treated like a single
 one, the formatting of the input file makes no difference to
-      \TeX,         % The \TeX command generates the TeX logo.
+      \TeX,
 but it makes a difference to you.
 When you use
-      \LaTeX,       % The \LaTeX command generates the LaTeX logo.
+      \LaTeX,
 making your input file as easy to read as possible
 will be a great help as you write your document and when you
 change it.  This sample file shows how you can add comments to
@@ -121,25 +124,25 @@ following sentence.
        all begin with G\@.   % \@ marks end-of-sentence punctuation.
 You should check the spaces after periods when reading your output to
 make sure you haven't forgotten any special cases.
-Generating an ellipsis \ldots\    % `\ ' needed because TeX ignores spaces after
-          % command names like \ldots made from \ + letters.
-          %
-          % Note how a `%' character causes TeX to ignore the
-          % end of the input line, so these blank lines do not
-          % start a new paragraph.
+Generating an ellipsis
+       \ldots\    % `\ ' needed because TeX ignores spaces after
+                  % command names like \ldots made from \ + letters.
+%
+% Note how a `%' character causes TeX to ignore the
+% end of the input line, so these blank lines do not
+% start a new paragraph.
 with the right spacing around the periods
 requires a special  command.
 
 \TeX\ interprets some common characters as commands, so you must type
 special commands to generate them.  These characters include the
 following:
-%       \$
        \& \% \# \{ and~\}.
 
 In printing, text is emphasized by using an
-       {\em italic\/}  % The \/ command produces the tiny extra space that
-               % should be added between a slanted and a following
-               % unslanted letter.
+{\em italic\/}    % The \/ command produces the tiny extra space that
+                  % should be added between a slanted and a following
+                  % unslanted letter.
 type style.
 
 \begin{em}
@@ -150,29 +153,10 @@ type style.
    distracting when used excessively.
 \end{em}
 
-\begin{table*}[b]
-\caption{The spherical case ($I_1=0$, $I_2=0$)}\label{sphericcase}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}crrrrc}
-\hline
-Equil. \\
-Points & \multicolumn{1}{c}{$x$} & \multicolumn{1}{c}{$y$} & \multicolumn{1}{c}{$z$} & \multicolumn{1}{c}{$C$} &
-S \\
-\hline
-$L_1$ & $-$2.485252241 & 0.000000000 & 0.017100631 & 8.230711648 & U \\
-$L_2$ &    0.000000000 & 0.000000000 & 3.068883732 & 0.000000000 & S \\
-$L_3$ &    0.009869059 & 0.000000000 & 4.756386544 & $-$0.000057922 & U \\
-$L_4$ &    0.210589855 & 0.000000000 & $-$0.007021459 & 9.440510897 & U \\
-$L_5$ &    0.455926604 & 0.000000000 & $-$0.212446624 & 7.586126667 & U \\
-$L_6$ &    0.667031314 & 0.000000000 & 0.529879957 & 3.497660052 & U \\
-$L_7$ &    2.164386674 & 0.000000000 & $-$0.169308438 & 6.866562449 & U \\
-$L_8$ &    0.560414471 & 0.421735658 & $-$0.093667445 & 9.241525367 & U \\
-\hline
-\end{tabular*}
-\end{table*}
 It is sometimes necessary to prevent \TeX\ from breaking a line where
 it might otherwise do so.  This may be at a space, as between the
 ``Mr.'' and ``Jones'' in
-       ``Mr.~Jones'',        % ~ produces an unbreakable interword space.
+``Mr.~Jones'',    % ~ produces an unbreakable interword space.
 or within a word---especially when the word is a symbol like
        \mbox{\em itemnum\/}
 that makes little sense when hyphenated across
@@ -183,10 +167,9 @@ that makes little sense when hyphenated across
 or
        \( a_{1} > x^{2n} / y^{2n} > x' \).
 Remember that a letter like
-       $x$        % $ ... $  and  \( ... \)  are equivalent
+       $x$    % $ ... $  and  \( ... \)  are equivalent
 is a formula when it denotes a mathematical symbol, and should
 be treated as one.
-
 
 \section{Notes}
 Footnotes\footnote{This is an example of a footnote.}
@@ -231,7 +214,6 @@ The following is an example of an {\em itemized} list, four levels deep.
 \end{itemize}
 
 
-
 The following is an example of an {\em enumerated} list, four levels deep.
 \begin{enumerate}
 \item  This is the first item of an enumerated list.  Each item
@@ -274,8 +256,8 @@ You can even display poetry.
 
 Mathematical formulas may also be displayed.  A displayed formula is
 one-line long; multiline formulas require special formatting
-instructions.
-   \[  x' + y^{2} = z_{i}^{2}\]
+instructions
+   \[  x' + y^{2} = z_{i}^{2}.\]
 Don't start a paragraph with a displayed equation, nor make
 one a paragraph by itself.
 
@@ -291,10 +273,32 @@ interesting than others.
 Obvious.
 \end{proof}
 
-\section{Tables and figures}
-Cross references to labelled tables you can see in Table~\ref{sphericcase} and also in Table~\ref{parset}.
+\section{Tables and Figures}
+Cross references to labelled tables you can see in Table~\ref{sphericcase}
+and also in Table~\ref{parset}.
 
-
+\begin{table*}
+\caption{The spherical case ($I_1=0$, $I_2=0$)}\label{sphericcase}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}crrrrc}
+\hline
+\hline
+ Equil. Points & \multicolumn{1}{c}{$x$} & \multicolumn{1}{c}{$y$} & \multicolumn{1}{c}{$z$} & \multicolumn{1}{c}{$C$} &
+S \\
+\hline
+$L_1$ & $-$2.485252241 & 0.000000000 & 0.017100631 & 8.230711648 & U \\
+$L_2$ &    0.000000000 & 0.000000000 & 3.068883732 & 0.000000000 & S \\
+$L_3$ &    0.009869059 & 0.000000000 & 4.756386544 & $-$0.000057922 & U \\
+$L_4$ &    0.210589855 & 0.000000000 & $-$0.007021459 & 9.440510897 & U \\
+$L_5$ &    0.455926604 & 0.000000000 & $-$0.212446624 & 7.586126667 & U \\
+$L_6$ &    0.667031314 & 0.000000000 & 0.529879957 & 3.497660052 & U \\
+$L_7$ &    2.164386674 & 0.000000000 & $-$0.169308438 & 6.866562449 & U \\
+$L_8$ &    0.560414471 & 0.421735658 & $-$0.093667445 & 9.241525367 & U \\
+$L_9$ &    0.560414471 & $-$0.421735658 & $-$0.093667445 & 9.241525367 & U\\
+$L_{10}$ & 1.472523232 & 1.393484549 & $-$0.083801333 & 6.733436505 & U \\
+$L_{11}$ & 1.472523232 & $-$1.393484549 & $-$0.083801333 & 6.733436505 & U
+\\ \hline
+\end{tabular*}
+\end{table*}
 
 
 A major
@@ -313,7 +317,7 @@ In other words, glucose represses (and not inhibits) the penicillin
 biosynthesis.
 
 These findings do not contradict the results of
-\cite{r1}  and of \cite{r4} which were obtained for
+\cite{r5} and of \cite{r6} which were obtained for
 continuous culture fermentations.
 Because for high values of the specific
 growth rate $\mu$ it is most likely (as shall be discussed below) that
@@ -330,7 +334,7 @@ of $0.24$ to $0.9$.
 Substituting $K _M$ in Eq. (\ref{cs}) by
 the value $K_{M}=1$ g/L as used by \cite{r1}, one finds
 with the above equation $0.3 < C_{s} < 9$ g/L. This agrees well with
-the work of  \cite{r4}, who reported that penicillin biosynthesis
+the work of \cite{r7}, who reported that penicillin biosynthesis
 repression only occurs at glucose concentrations from $C_{s}=10$ g/L on.
 The conclusion is that the glucose concentrations in the experiments of
 Pirt and Rhigelato probably were too low for glucose repression to be
@@ -338,12 +342,12 @@ detected. The experimental data published by Ryu and Hospodka
 are not detailed sufficiently to permit a similar analysis.
 
 \begin{table}
-\centering
-\caption{Parameter sets used by Bajpai and Reu\ss are not detailed sufficiently to permit a similar analysis}\label{parset}
+\caption{Parameter sets used by Bajpai and Reu\ss are not detailed sufficiently to permit a similar analysis}
+\label{parset}
 \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}llll}
 \hline
 \hline
-\multicolumn{2}{@{}l}{Parameter} & {\it Set 1} & {\it Set 2}\\
+\multicolumn{2}{@{}l}{\textit{Parameter}} & \textit{Set 1} & \textit{Set 2}\\
 \hline
 $\mu_{x}$           & [h$^{-1}$]  & 0.092       & 0.11          \\
 $K_{x}$             & [g/g DM]     & 0.15        & 0.006         \\
@@ -368,17 +372,19 @@ It is interesting that simulations with the \cite{r4} model for the
 initial conditions given by these authors indicate that, when the
 remaining substrate is fed at a constant rate, a considerable and
 unrealistic amount of penicillin is
-produced when the glucose concentration is still very high \cite{r2,r3,r4}
+produced when the glucose concentration is still very high \cite{r2,r3,r4}.
 Simulations with the Bajpai and Reu\ss\ model correctly predict almost
 no penicillin production in similar conditions.
 
 \begin{figure}
-\fbox{\parbox[b][1.5cm]{3cm}{\ }}
+\centering
+\fbox{\makebox[5cm][c]{Picture}\rule[-1.5cm]{0pt}{3cm}}
 %\includegraphics{}
 \caption{Pathway of the penicillin G biosynthesis.}\label{penG}
 \end{figure}
 
-Sample of cross-reference to figure. Figure~\ref{penG} shows that is not easy to get something on paper.
+Sample of cross-reference to figure.
+Figure~\ref{penG} shows that is not easy to get something on paper.
 
 
 \section{Headings}
@@ -404,7 +410,7 @@ Two equations:
 \end{equation}
 and
 \begin{equation}
-    G = \frac{P_{\rm opt} - P_{\rm ref}}{P_{\rm ref}} \mbox{\ }100 \mbox{\ }(\%)
+    G = \frac{P_{\rm opt} - P_{\rm ref}}{P_{\rm ref}} \mbox{\ }100 \mbox{\ }(\%).
 \end{equation}
 
 Two equation arrays:
@@ -414,17 +420,17 @@ Two equation arrays:
   \frac{dP}{dt} & =    \pi    X - k_{h} P\\
   \frac{dV}{dt} & =    F
 \end{align}
-and,
-\begin{align*}
+and
+\begin{align}
  \mu_{\rm substr} & =  \mu_{x} \frac{C_{s}}{K_{x}C_{x}+C_{s}}  \\
  \mu              & =  \mu_{\rm substr} - Y_{x/s}(1-H(C_{s}))(m_{s}+\pi /Y_{p/s}) \\
  \sigma           & =  \mu_{\rm substr}/Y_{x/s}+ H(C_{s}) (m_{s}+ \pi /Y_{p/s})
-\end{align*}
+\end{align}
 
 
 \appendix
 
-\section{Appendix section}\label{app}
+\section{Appendix Section}\label{app}
 
 We consider a sequence of queueing systems
 indexed by $n$.  It is assumed that each system
@@ -441,7 +447,7 @@ move through the network, never visiting a station
 more than once, until they eventually exit
 the system.
 
-\subsection{Appendix subsection}
+\subsection{Appendix Subsection}
 
 However, different customer classes may visit
 stations in different orders; the system
@@ -458,34 +464,42 @@ Sample of cross-reference to the formula \ref{path} in Appendix~\ref{app}.
 
 \section*{Acknowledgements}
 And this is an acknowledgements section with a heading that was produced by the
-$\backslash$section* command. Thank you all for helping me writing this
+\verb|\section*| command. Thank you all for helping me writing this
 \LaTeX\ sample file.
 
 \begin{thebibliography}{9}
 
-\bibitem[Billingsley (1999)]{r1}
-\textsc{Billingsley, P.} (1999). \textit{Convergence of
-Probability Measures}, 2nd ed.
-Wiley, New York.
-\MR{1700749}
+\bibitem{r1} C. A. Athanasiadis, On a refinement of the generalized
+Catalan numbers for Weyl groups. \textit{Trans. AMS} \textbf{357} (2005), 179--196.
+\MR{2098091}
 
+\bibitem{r2} D. Bessis, The dual braid monoid,
+\textit{Ann. Sci. \'Ecole Norm. Sup.} S\'er. IV \textbf{36} (2003), 647--683.
+\MR{2032983}
 
-\bibitem[Bourbaki (1996)]{r2}
-\textsc{Bourbaki, N.}  (1966). \textit{General Topology}  \textbf{1}.
-Addison--Wesley, Reading, MA.
+\bibitem{r3} N. Bourbaki,
+\textit{Groupes et alg\`ebres de Lie}, Chapitres 4, 5 et 6, Hermann,
+Paris (1975).
+\MR{0453824}
 
-\bibitem[Ethier and Kurtz (1985)]{r3}
-\textsc{Ethier, S. N.} and \textsc{Kurtz, T. G.} (1985).
-\textit{Markov Processes: Characterization and Convergence}.
-Wiley, New York.
-\MR{838085}
+\bibitem{r4} P. Cellini and P. Papi,
+ad-nilpotent ideals of a Borel subalgebra. \textit{J.~Algebra} \textbf{225} (2000), 130--141.
+\MR{1743654}
 
-\bibitem[Prokhorov (1956)]{r4}
-\textsc{Prokhorov, Yu.} (1956).
-Convergence of random processes and limit theorems in probability
-theory. \textit{Theory  Probab.  Appl.}
-\textbf{1} 157--214.
-\MR{84896}
+\bibitem{r5} P. Cellini and P. Papi,
+ad-nilpotent ideals of a Borel subalgebra II. \textit{J.~Algebra} \textbf{258} (2002), 112--121.
+\MR{1958899}
+
+\bibitem{r6}
+R. P. Dilworth,  Proof of a conjecture on finite modular
+lattices.
+\textit{Annals Math.} \textbf{60} (1954), 359--364.
+\MR{0063348}
+
+\bibitem{r7}
+J. E. Humphreys,  \textit{Reflection Groups and Coxeter Groups}.
+Cambridge Univ. Press. (1992).
+\MR{1066460}
 
 \end{thebibliography}
 

@@ -58,6 +58,9 @@ In case *Chinese* symbols are used in the manuscript:
     ```
 * `luatex` engine should be used to produce `PDF` file.
 
+`iccmpdfwf.cls` file loads `flushend.sty` and `stfloats.sty` from [`sttools`](https://ctan.org/pkg/sttools) package.
+Please make sure that your TeX system has the latest version of this package.
+
 ### Document class options
 
 For bibliography references output and citations a `natbib` package
@@ -91,9 +94,9 @@ The preamble of your LaTeX document should look like this:
 
     \begin{frontmatter}
 
-        \title{A Sample Document%
+        \title{Title%
                \protect\thanks{Footnote to the title with the `thankstext' command.}}
-        \runtitle{A Sample Document}
+        \runtitle{Title}
 
         \author{by First Author}%
         \thanks{Department, University of the First Author, Country
