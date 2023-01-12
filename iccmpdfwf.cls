@@ -15,8 +15,21 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{iccmpdfwf}
-    [2019/01/25 v2.5, driver class for journal ICCM]
+    [2023/01/12 v2.5.3, driver class for journal ICCM]
 
+%%  DEPENDENCIES:
+%%  - article.cls
+%%  - etoolbox.sty
+%%  - luatex85.sty
+%%  - cuted.sty
+%%  - zwpagelayout.sty
+%%  - iccm-vtex.cfg
+%%  - stfloats.sty
+%%  - natbib.sty
+%%  - flushend.sty
+%%  - hyperref.sty
+%%  - xcolor.sty
+%%
 %%  CLASS FILE CONTENT:
 %%  - VTeX SETUP
 %%  - PAGE LAYOUT
@@ -98,7 +111,8 @@
 \def\@page@headsep   {14\p@}
 \def\@page@footskip  {16\p@}
 
-\usepackage[
+\RequirePackage[
+    nopdfinfo,
     nopagenumbers,
     papersize={\trim@width,\trim@height},
     textwidth=514\p@,
@@ -177,6 +191,31 @@
 \def\nohyphen{%
     \pretolerance=\@M \tolerance=\@M \hyphenpenalty=\@M \exhyphenpenalty=\@M
     }
+
+\AtBeginDocument{%
+  %\DeclareUnicodeComposite{\k}{A}{"0104}%
+  %\DeclareTextCompositeCommand{\k}{PD1}{A}{\404}% U+0104
+  \let\k@sav\k
+  \def\k#1{%
+    \ifx A#1\relax Ą\else
+      \ifx a#1\relax ą\else
+        \ifx E#1\relax Ę\else
+          \ifx e#1\relax ę\else
+            \ifx I#1\relax Į\else
+              \ifx i#1\relax į\else
+                \ifx U#1\relax Ų\else
+                  \ifx u#1\relax ų\else
+                    \k@sav{#1}%
+                  \fi
+                \fi
+              \fi
+            \fi
+          \fi
+        \fi
+      \fi
+    \fi
+    }%
+  }
 %%
 %%  ======= ATTRIBUTES =======
 %%
@@ -219,7 +258,20 @@
     \def\@copyrightyear{}
 \def\volume#1{\gdef\@volume{Volume\ #1}}
     \gdef\@volume{}
-\def\issue#1{\gdef\@issue{Number\ #1}}
+\def\issue#1{%
+    \gdef\@issue{Number\ #1}%
+    \ifx\@month\@empty
+        \ifx#11\relax
+            \gdef\@month{July}%
+        \else
+            \ifx#12\relax
+                \gdef\@month{December}%
+            \else
+                \gdef\@month{???}%
+            \fi
+        \fi
+    \fi
+    }
     \gdef\@issue{}
 
 \newcounter{firstpage}
@@ -299,7 +351,7 @@
 \def\hb@IIIwd #1{\hbox to .3\textwidth{#1}}
 
 \def\pubmonth#1{\gdef\@month{#1}}
-\gdef\@month{July}
+\gdef\@month{}
 
 \def\fakesc{\bgroup\obeyspaces\fakesc@}
 \def\fakesc@#1{\fakesc@@ #1\relax\relax\egroup}
