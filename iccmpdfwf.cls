@@ -15,7 +15,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{iccmpdfwf}
-    [2023/01/12 v2.5.3, driver class for journal ICCM]
+    [2023/02/23 v2.5.4, driver class for journal ICCM]
 
 %%  DEPENDENCIES:
 %%  - article.cls
@@ -1135,7 +1135,7 @@
 
 %%  This splits MR... (...)
 \def\@MR#1 #2\relax#3{%
-    \href{http://www.ams.org/mathscinet-getitem?mr=#1}{\MRfixed{#3}}%
+    \href{https://mathscinet.ams.org/mathscinet-getitem?mr=#1}{\MRfixed{#3}}%
     }
 %%
 %%  ======= REFERENCES =======
