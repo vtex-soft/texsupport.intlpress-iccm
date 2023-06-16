@@ -15,21 +15,8 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{iccmpdfwf}
-    [2023/02/23 v2.5.4, driver class for journal ICCM]
+    [2023/06/16 v2.06, driver class for journal ICCM]
 
-%%  DEPENDENCIES:
-%%  - article.cls
-%%  - etoolbox.sty
-%%  - luatex85.sty
-%%  - cuted.sty
-%%  - zwpagelayout.sty
-%%  - iccm-vtex.cfg
-%%  - stfloats.sty
-%%  - natbib.sty
-%%  - flushend.sty
-%%  - hyperref.sty
-%%  - xcolor.sty
-%%
 %%  CLASS FILE CONTENT:
 %%  - VTeX SETUP
 %%  - PAGE LAYOUT
@@ -63,10 +50,10 @@
 \def\@vtexname{VTeX}
 \def\@vtexpublisher{intlpress}
 \def\@vtexproject{iccmpdfwf}
-\def\journal@name{Notices of the ICCM}
-\def\journal@name@sc{\fakesc{Notices\ of\ the\ ICCM}}
+\def\journal@name{ICCM Notices}
 
 \RequirePackage{etoolbox}
+\RequirePackage{graphicx}
 
 \@ifundefined{pdfoutput}{%
     \RequirePackage{luatex85}%
@@ -80,8 +67,7 @@
     \edef\pdfomitcidset {\pdfvariable omitcidset}%
     \edef\pdfxformmargin {\pdfvariable xformmargin}%
     \edef\pdfsuppressoptionalinfo {\pdfvariable suppressoptionalinfo }%
-    \edef\pdftrailerid {\pdfvariable trailerid }%
-    }{}
+    \edef\pdftrailerid {\pdfvariable trailerid } } { }
 
 \newif\if@load@natbib@\@load@natbib@true
 \DeclareOption{nonatbib}{\@load@natbib@false}
@@ -89,13 +75,13 @@
 \newif\if@numbered@bibliography\@numbered@bibliographytrue
 \DeclareOption{authoryear}{\@numbered@bibliographyfalse}
 
-\newif\if@numbered@section\@numbered@sectionfalse
+\newif\if@numbered@section\@numbered@sectiontrue
 \DeclareOption{numsec}{\@numbered@sectiontrue}
 
-\newif\if@section@eqno\@section@eqnofalse
+\newif\if@section@eqno\@section@eqnotrue
 \DeclareOption{eqsecno}{\@section@eqnotrue}
 
-\PassOptionsToClass{letter,10pt,twoside,twocolumn,leqno}{article}
+\PassOptionsToClass{a1paper,12pt,twoside}{article}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions*
 
@@ -105,37 +91,36 @@
 %%
 \RequirePackage{cuted}
 
-\def\trim@width      {8.5in}
-\def\trim@height     {11in}
-\def\@page@headheight{12\p@}
-\def\@page@headsep   {14\p@}
+\def\trim@width      {7in}      %PAGE SIZE GLOBAL
+\def\trim@height     {10in}
+\def\@page@headheight{12\p@}  
+\def\@page@headsep   {12\p@}
 \def\@page@footskip  {16\p@}
 
-\RequirePackage[
-    nopdfinfo,
+\usepackage[
     nopagenumbers,
     papersize={\trim@width,\trim@height},
-    textwidth=514\p@,
-    textheight=\dimexpr(695\p@ + \@page@headheight + \@page@headsep + \@page@footskip)\relax,
-    topmargin=22\p@,
+    textwidth=372\p@,
+    textheight=\dimexpr(590\p@ + \@page@headheight + \@page@headsep + \@page@footskip)\relax,
+    topmargin=36\p@, %top margin
     headheight=12\p@,
-    headsep=14\p@,
+    headsep=12\p@,
     strictheight,
-    leftmargin=0.58in,
-    footskip=16\p@
+    leftmargin=0.84in,
+    footskip=16\p@  %between line and text
     ]{zwpagelayout}
 
-\setlength\parindent{0.25in}
-\setlength\columnsep{0.375in}
+\setlength\parindent{0.2in}
+\setlength\columnsep{0.1in}
 
-\setlength\smallskipamount{6\p@ \@plus 1\p@ \@minus 1\p@}
+\setlength\smallskipamount{8\p@ \@plus 1\p@ \@minus 1\p@}
 \setlength\medskipamount  {12\p@ \@plus 3\p@ \@minus 3\p@}
-\setlength\bigskipamount  {18\p@ \@plus 3\p@ \@minus 3\p@}
+\setlength\bigskipamount  {16\p@ \@plus 3\p@ \@minus 3\p@}
 %%
 %%  ======= FONT =======
-%%
+%%     %FONT SIZE GLOBAL
 \renewcommand\normalsize{%
-    \@setfontsize\normalsize{9.5\p@}{12.5\p@ plus .3\p@ minus .3\p@}%
+    \@setfontsize\normalsize{10.5\p@}{13.6\p@ plus .3\p@ minus .3\p@}% 
     \abovedisplayskip 10\p@ \@plus2\p@ \@minus2\p@
     \abovedisplayshortskip 6\p@ \@plus2\p@
     \belowdisplayshortskip 6\p@ \@plus2\p@
@@ -143,7 +128,7 @@
     \let\@listi\@listI
     }
 \renewcommand\small{%
-    \@setfontsize\small{9.5}{11.5}%
+    \@setfontsize\small{10.5}{11.5}%
     \abovedisplayskip 8.5\p@ \@plus3\p@ \@minus4\p@
     \abovedisplayshortskip \z@ \@plus2\p@
     \belowdisplayshortskip 4\p@ \@plus2\p@ \@minus2\p@
@@ -167,13 +152,13 @@
     \belowdisplayskip \abovedisplayskip
     }
 
-\renewcommand\scriptsize{\@setfontsize\scriptsize{6.3}{7.45}}
+\renewcommand\scriptsize{\@setfontsize\scriptsize{8.3}{9.45}}
 \renewcommand\tiny{\@setfontsize\tiny{5.25}{6.3}}
-\renewcommand\large{\@setfontsize\large{12.6}{14.7}}
-\renewcommand\Large{\@setfontsize\Large{14.7}{18.9}}
+\renewcommand\large{\@setfontsize\large{10.5}{11}}
+\renewcommand\Large{\@setfontsize\Large{13}{16}}
 \renewcommand\LARGE{\@setfontsize\LARGE{17.8}{23.2}}
 \renewcommand\huge{\@setfontsize\huge{21}{26.25}}
-\renewcommand\Huge{\@setfontsize\Huge{26.25}{31.5}}
+\renewcommand\Huge{\@setfontsize\Huge{23}{25}}
 
 \@input{iccm-vtex.cfg}
 
@@ -191,48 +176,37 @@
 \def\nohyphen{%
     \pretolerance=\@M \tolerance=\@M \hyphenpenalty=\@M \exhyphenpenalty=\@M
     }
-
-\AtBeginDocument{%
-  %\DeclareUnicodeComposite{\k}{A}{"0104}%
-  %\DeclareTextCompositeCommand{\k}{PD1}{A}{\404}% U+0104
-  \let\k@sav\k
-  \def\k#1{%
-    \ifx A#1\relax Ą\else
-      \ifx a#1\relax ą\else
-        \ifx E#1\relax Ę\else
-          \ifx e#1\relax ę\else
-            \ifx I#1\relax Į\else
-              \ifx i#1\relax į\else
-                \ifx U#1\relax Ų\else
-                  \ifx u#1\relax ų\else
-                    \k@sav{#1}%
-                  \fi
-                \fi
-              \fi
-            \fi
-          \fi
-        \fi
-      \fi
-    \fi
-    }%
-  }
 %%
+
+\def\abstractlocation#1{%
+    \let\\ \@centercr\@rightskip #1 plus 1fil  
+    \rightskip=2pc
+    \leftskip=2pc
+    \parindent\z@\nohyphen
+    }
+
+\def\abstractlocationnew#1{%
+    \let\\ \@centercr\@rightskip #1 plus 1fil  
+    \rightskip=2pc
+    \leftskip=2pc
+    \parindent\z@\nohyphen
+    }    
 %%  ======= ATTRIBUTES =======
 %%
 \def\frontmatter@style{%
-    \vskip1.75in\hrule height .98\p@
-    \let\@footnotemark\H@@footnotemark\raggedright
+    \vskip12\p@
     }
-\def\title@style{\raggedrightmargin{11pc}}
-\def\author@style{\raggedrightmargin{11pc}}
-\def\abstract@style{\normaltext}
+\def\title@style{\raggedrightmargin{0pc}}
+\def\author@style{\raggedrightmargin{0pc}}
+\def\abstract@style{\abstractlocation{0pc}} 
+\def\abstractint@style{\abstractlocationnew{0pc}}%Use this or textwidth
 \def\keyword@style{\normaltext}
 
-\def\title@skip{23\p@}
+\def\title@skip{12\p@}  %title top skip                 %Most of the font size here except for section title
 \def\subtitle@skip{16\p@}
-\def\authors@skip{16\p@}
-\def\abstract@skip{\medskipamount}
-\def\abstractname@skip{\hskip12\p@}
+\def\authors@skip{10\p@}
+\def\abstract@skip{16\p@}
+\def\abstractname@skip{\hskip10\p@}
 \def\keyword@skip{10\p@}
 
 \def\keyword@width{.8\textwidth}
@@ -240,39 +214,28 @@
 \def\abstract@indent{0\p@}
 \def\keyword@indent{0\p@}
 
-\def\title@size{\fontsize{21\p@}{31\p@}\bfseries}
-\def\subtitle@size{\large\bfseries}
-\def\author@size{\fontsize{14.7\p@}{17\p@}\bfseries}
+\def\title@size{\Huge\sc}
+\def\subtitle@size{\Large\sc}
+\def\author@size{\Large\sc}
 \def\abstract@size{\normalsize\upshape\mdseries}
-\def\abstractname@size{\bfseries}
+\def\abstractname@size{\normalsize\sc}
+\def\abstractnameint@size{\normalsize}
 \def\keyword@size{\normalsize\upshape\mdseries}
 \def\keywordname@size{\scshape}
-\def\copyright@size{\small\bfseries}
+\def\copyright@size{\large}
 \def\pagenumber@size{\small\upshape}
-\def\thebibliography@size{\footnotesize}
+\def\thebibliography@size{\small}
 %%
 %%  ======= PREAMBLE =======
 %%
 \def\pubyear#1{\gdef\@pubyear{#1}\gdef\@copyrightyear{#1}}
-    \def\@pubyear{}
+    \def\@pubyear{2023}
     \def\@copyrightyear{}
 \def\volume#1{\gdef\@volume{Volume\ #1}}
-    \gdef\@volume{}
-\def\issue#1{%
-    \gdef\@issue{Number\ #1}%
-    \ifx\@month\@empty
-        \ifx#11\relax
-            \gdef\@month{July}%
-        \else
-            \ifx#12\relax
-                \gdef\@month{December}%
-            \else
-                \gdef\@month{???}%
-            \fi
-        \fi
-    \fi
-    }
-    \gdef\@issue{}
+    \gdef\@volume{10}
+\def\issue#1{\gdef\@issue{Number\ #1}}
+    \gdef\@issue{1}
+
 
 \newcounter{firstpage}
 \newcounter{lastpage}
@@ -320,56 +283,46 @@
 \gdef\@id@line{}
 
 \def\ps@copyright{%
-    \let\@mkboth\@gobbletwo
-    \def\@evenhead{\proof@id@line}%
-    \let\@oddhead\@evenhead
+   \let\@mkboth\@gobbletwo
+   \def\@oddhead{\ifnum \thepage=1 % use different formatting for first page
+           {{\hspace{-2.2cm}\includegraphics[height=2cm]{head.pdf}}
+           }%
+       \else % use regular formatting for all other pages
+           \centering\hfill\sc\@runtitle\hfill
+                \fi
+                          }
+  \def\@evenhead{%
+      \centering\hfill\sc\@runauthor\hfill
+       }
     \def\@oddfoot{%
-        \fmt@copyright@info{\expandafter\fakesc\expandafter{\@month}\ \@pubyear\hfill}%
-                           {\hfill{\journal@name@sc}\hfill}%
-                           {\hfill\thepage}%
+        \fmt@copyright@info{\expandafter\sc\expandafter{\@month}\ \@pubyear\hfill}%
+                           {\hfill{\sc\journal@name}\hfill}%
+                           {\sc\hfill\thepage}%
         }%
     \def\@evenfoot{%
-        \fmt@copyright@info{\thepage\hfill}%
-                           {\hfill{\journal@name@sc}\hfill}%
-                           {\hfill \expandafter\fakesc\expandafter{\@volume},%
-                            \ \expandafter\fakesc\expandafter{\@issue}}%
+        \fmt@copyright@info{\sc\thepage\hfill}%
+                           {\hfill{\sc\journal@name}\hfill}%
+                           {\hfill \expandafter\sc\expandafter{Vol.\@volume}%
+                         }%
         }%
     }
 
 \let\proof@id@line\relax
 
-
 \def\fmt@copyright@info#1#2#3{%
     \vtop to0\p@{%
-        \hsize=\textwidth\hrule height 0.48\p@\hfil
+        \hsize=\textwidth\hrule height 0.5\p@\hfil
         \kern-\parindent\lower 10\p@
         \hbox to\textwidth{%
             \copyright@size\hb@IIIwd{#1}\hfill\hb@IIIwd{#2}\hfill\hb@IIIwd{#3}%
             }%
         }%
     }
-\def\hb@IIIwd #1{\hbox to .3\textwidth{#1}}
+\def\hb@IIIwd #1{\hbox to 0.33\textwidth{#1}}
 
 \def\pubmonth#1{\gdef\@month{#1}}
-\gdef\@month{}
+\gdef\@month{June}
 
-\def\fakesc{\bgroup\obeyspaces\fakesc@}
-\def\fakesc@#1{\fakesc@@ #1\relax\relax\egroup}
-\def\fakesc@@#1{%
-    \ifx#1\relax
-    \else
-        \ifcat#1\@sptoken{}%
-            \expandafter\expandafter\expandafter\fakesc@@
-        \else
-            \ifnum`#1=\uccode`#1
-                {\normalsize #1}%
-            \else
-                {\scriptsize \uppercase{#1}}%
-            \fi
-            \expandafter\expandafter\expandafter\fakesc@@\expandafter
-        \fi
-    \fi
-    }
 %%
 %%  >>>>>>> FRONTMATTER >>>>>>>
 %%
@@ -380,6 +333,7 @@
     \global\let\maketitle\relax
     \open@fm \ignorespaces
     }
+    
 \def\endfrontmatter{%
     \global\@topnum\z@  % Prevents figures from going at top of page.
     \set@pagerange
@@ -431,7 +385,8 @@
         \unvbox\@tempboxa
         \fm@size=\dp\fm@box \advance\fm@size by \ht\fm@box
         }%
-    \emergencystretch=1pc \twocolumn[\unvbox\fm@box]
+    \emergencystretch=1pc 
+    \unvbox\fm@box
     }
 
 \def\frontmatter@cmd{%
@@ -695,7 +650,7 @@
 \def\@abstract[#1]{%
     \global\setbox\abstract@box=\vbox
     \bgroup
-        \hsize=\columnwidth
+        \hsize=\columnwidth 
         \ifvoid\abstract@box
         \else
             \unvbox\abstract@box
@@ -709,12 +664,37 @@
             \noindent
             \hskip\abstract@indent{\abstractname@size\abstractname\abstractname@skip}%
         \fi
-        \ignorespaces
+        \ignorespaces    
     }
 \def\endabstract{%
         \par
     \egroup
     }
+
+\gdef\abstractint{\@ifnextchar[{\@abstractint}{\@abstractint[]}}
+\def\@abstractint[#1]{%
+    \global\setbox\abstract@box=\vbox
+    \bgroup
+        \hsize=\columnwidth 
+        \ifvoid\abstract@box
+        \else
+            \unvbox\abstract@box
+            \vskip\abstract@skip
+        \fi
+        \abstractint@style
+        \abstract@size
+        \ifx\abstractnamenew\empty
+            \parindent\sv@parindent
+        \else
+            \noindent
+            \hskip\abstract@indent{\abstractnameint@size\abstractnamenew\abstractname@skip}%
+        \fi
+        \ignorespaces    
+    }
+\def\endabstractint{%
+        \par
+    \egroup
+    }    
 
 \def\abstract@fmt{%
     \ifvoid\abstract@box
@@ -817,7 +797,7 @@
     }
 
 \def\footnoterule{%
-    \kern-5\p@ \hrule width 50.8mm height .42\p@ depth0\p@
+    \kern-5\p@ \hrule width 32mm height 0.5\p@ depth0\p@
     \kern 6\p@  %% The \hrule is hairline
     }
 
@@ -919,16 +899,18 @@
 
 \setcounter{secnumdepth}{4}
 
-\renewcommand\section{%
-    \@startsection{section}{1}{\z@}%
-                  {\bigskipamount}%
-                  {\smallskipamount}%
-                  {\raggedright\large\bfseries\mathversion{bold}}}
+\newcommand{\smallcaps}[1]{\textsc{#1}}
+\renewcommand\section{
+\@startsection{section}{1}{\z@}%
+                 {\bigskipamount}%
+                 {\smallskipamount}%
+        {\raggedright\Large\mathversion{bold}\textsc}}
+                  
 \renewcommand\subsection{%
     \@startsection{subsection}{2}{\z@}%
                   {\bigskipamount}%
                   {\smallskipamount}%
-                  {\raggedright\bfseries\mathversion{bold}}}
+                  {\raggedright\mathversion{bold}\textsc}}
 \renewcommand\subsubsection{%
     \@startsection{subsubsection}{3}{12\p@}%
                   {\smallskipamount}%
@@ -1011,7 +993,7 @@
             \itemsep\z@}
 \def\list@parindent{1pc}
 
-\let\quotation@size\article@footnotesize
+\let\quotation@size\small
 \def\quotation@itemindent{\list@parindent}
 \def\quotation@parindent{\list@parindent}
 \def\quotation@leftmargin{\list@parindent}
@@ -1115,9 +1097,6 @@
 \fi
 \AtBeginDocument{\@ifpackageloaded{natbib}{\set@natbib}{}}%
 
-\RequirePackage{flushend}
-%% Activating `keeplastbox' option, which was not present in TL2010 style version
-\@ifpackagelater{flushend}{2015/04/08}{\global\@remove@lastbox@at@balancingfalse}{}
 %%
 %%  ======= SMART \MR =======
 %%
@@ -1135,7 +1114,7 @@
 
 %%  This splits MR... (...)
 \def\@MR#1 #2\relax#3{%
-    \href{https://mathscinet.ams.org/mathscinet-getitem?mr=#1}{\MRfixed{#3}}%
+    \href{http://www.ams.org/mathscinet-getitem?mr=#1}{\MRfixed{#3}}%
     }
 %%
 %%  ======= REFERENCES =======
@@ -1197,6 +1176,7 @@
         }%
     %%  Put document info
     \def\write@pdfinfo##1##2{%
+        \gdef##1{##2}%
         \protected@write\@auxout{\no@harm}{\string\gdef\string##1{##2}}%
         }%
     \@ifundefined{hy@title}{}{\pdfstringdef\@pdftitle{\hy@title}}%
@@ -1206,7 +1186,7 @@
     %%  MR with hyperef
     \def\MR##1{\@MR##1 \relax{##1}}%
     }
-\def\write@pdfinfo#1#2{}
+\def\write@pdfinfo#1#2{\gdef #1{#2}}
 %%
 %%  ======= INICIALIZATION =======
 %%

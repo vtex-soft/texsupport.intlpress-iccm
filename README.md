@@ -26,7 +26,7 @@ The following files are given in the repository (or directly in `*.zip` archive)
 
 ## Setup
 * Clone the repository or download the `*.zip` archive. Rename the package to `<your-project-name>`.
-* Install `iccmpdfwf.cls` in your TeX system (suggested directory: `ipart`).
+* Install `iccmpdfwf.cls` in your TeX system (suggested directory: `iccm`).
 * Use the file `amsa-template.tex` to start your article as a template.
 * Use the file `amsa-sample.tex` as a reference for how to prepare a topmatter of your article.
 
@@ -36,30 +36,15 @@ Use `iccm-template.tex` as a template.
 
 ### Dependencies
 
-In case *Chinese* symbols are used in the manuscript:
-* `fontspec.sty` package should be used:
-    ```latex
-    \usepackage{fontspec}
-    \setmainfont[
-        Extension=.otf,
-        UprightFont=*-regular,
-        BoldFont=*-bold,
-        ItalicFont=*-italic,
-        BoldItalicFont=*-bolditalic,
-        ]{texgyrepagella}
-
-    ```
+In case *Chinese* symbols are used in the manuscript`fontspec.sty` package should be used:
 * [`Fandol`](https://ctan.org/tex-archive/fonts/fandol) (or some other) fonts 
   for Chinese typesetting should be installed in TeX system and used in the following way:
     ```latex
-    \newfontfamily\textzhfamily{FandolHei-Regular.otf}
+    \newfontfamily\textzhfamily{FandolSong-Regular.otf}
     \def\textzh#1{{\textzhfamily #1}}
     \textzh{林振峰}
     ```
 * `luatex` engine should be used to produce `PDF` file.
-
-`iccmpdfwf.cls` file loads `flushend.sty` and `stfloats.sty` from [`sttools`](https://ctan.org/pkg/sttools) package.
-Please make sure that your TeX system has the latest version of this package.
 
 ### Document class options
 
@@ -72,7 +57,7 @@ It provides numbered citations.
 
 In case author-year citation is required, provide the `authoryear` option:
 ```latex
-\documentclass[authoryear]{ipart}
+\documentclass[authoryear]{iccmpdfwf}
 ```
 All `natbib` package options can be provided in this way.
 
@@ -80,7 +65,7 @@ In case some other bibliography package is used
 which is not compatible with `natbib` package,
 one can disable the latter with the option `nonatbib`:
 ```latex
-\documentclass[nonatbib]{ipart}
+\documentclass[nonatbib]{iccmpdfwf}
 ```
 
 ### LaTeX document preamble content
@@ -98,18 +83,11 @@ The preamble of your LaTeX document should look like this:
                \protect\thanks{Footnote to the title with the `thankstext' command.}}
         \runtitle{Title}
 
-        \author{by First Author}%
-        \thanks{Department, University of the First Author, Country
-                \hfill\break E-mail: e-mail1@mail.com},
+        \author{First Author}%
+        \ and 
         \author{Second Author}%
-        \thanks{Department, University of the Second Author, Country
-                \hfill\break E-mail: e-mail2@mail.com},
-        and
-        \author{Third Author}%
-        \thanks{Department, University of the Third Author, Country
-                \hfill\break E-mail: e-mail3@mail.com}
-
-        \runauthor{F. Author et al.}
+        
+        \runauthor{F. Author and S. Author}
 
         \begin{abstract}
             ...

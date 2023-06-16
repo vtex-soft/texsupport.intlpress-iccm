@@ -6,37 +6,23 @@
 
 \RequirePackage{amsthm,amsmath}
 
-%%  If you whant to typset utf8 characters directly,
-%%  use lualatex and uncomment lines below 
-%%  from here
-
-%\usepackage{fontspec}
-%\setmainfont[
-%  Extension=.otf,
-%  UprightFont=*-regular,
-%  BoldFont=*-bold,
-%  ItalicFont=*-italic,
-%  BoldItalicFont=*-bolditalic,
-%  ]{texgyrepagella}
-
-%%  till here.
-%%  And comment the following line
-\RequirePackage{tgpagella}
-
+%  Make sure you use LuaLatex to compile for the Chinese language support.
+%%  If you don't use lualatex comment lines below
+%%  from here --------------
+\usepackage{fontspec}
 \startlocaldefs
-% For chinese symbols use \textzh{...}
+%%  For chinese symbols use \textzh{...}
 \@ifpackageloaded{fontspec}{%
-    %% Please make sure that `Fandol' fonts exist in TeX system
-    %% or use some alternative font for Chinese symbols
-    \newfontfamily\textzhfamily{FandolHei-Regular.otf}%
-    \def\textzh#1{{\textzhfamily #1}}%
-    }{%
-    \def\textzh#1{\texttt{no unicode}}%
-    }
+    %%  Please make sure that `Fandol' fonts exist in TeX system
+    %%  or use some alternative font for Chinese symbols
+    \newfontfamily\textzhfamily{FandolSong-Regular.otf}%
+  \def\textzh#1{{\textzhfamily #1}}%
+    }%
+\endlocaldefs
+%% until here -------------  
 
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[section]
-\endlocaldefs
 
 %%  Settings
 \pubyear{2019}
@@ -54,13 +40,13 @@
 
 \runtitle{}
 
-\author{by }\thanks{ \hfill\break E-mail: },
-\author{}\thanks{ \hfill\break E-mail: },
+\author{},
+\author{},
 and
-\author{}\thanks{ \hfill\break E-mail: }
+\author{}
 
 %%  For the same footnote symbol:
-%\author{by Author1}\thanksmark[\textdagger]{T1},
+%\author{Author1}\thanksmark[\textdagger]{T1},
 %\author{Author2}\thanksmark[\textdagger]{T1}, and
 %\author{Author3}\thanksmark[\textdagger]{T1}
 %\thankstext[\textdagger]{T1}{Footnote text}
