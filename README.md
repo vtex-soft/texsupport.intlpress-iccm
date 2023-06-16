@@ -18,6 +18,7 @@ Author support service provides LaTeX style files and `*.tex` file templates des
 
 The following files are given in the repository (or directly in `*.zip` archive):
 
+* `head.pdf` - logo image
 * `iccmpdfwf.cls` - LaTeX style files designed for International Press *ICCM Notices* journal articles.
   Please do not change them. These files are already loaded in the respective template files;
 * `iccm-template.tex` - topmatter template (should be used for article preparation);
@@ -27,8 +28,8 @@ The following files are given in the repository (or directly in `*.zip` archive)
 ## Setup
 * Clone the repository or download the `*.zip` archive. Rename the package to `<your-project-name>`.
 * Install `iccmpdfwf.cls` in your TeX system (suggested directory: `iccm`).
-* Use the file `amsa-template.tex` to start your article as a template.
-* Use the file `amsa-sample.tex` as a reference for how to prepare a topmatter of your article.
+* Use the file `iccm-template.tex` to start your article as a template.
+* Use the file `iccm-sample.tex` as a reference for how to prepare a topmatter of your article.
 
 ## Recommended usage of `iccmpdfwf` package
 
