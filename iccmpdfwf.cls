@@ -15,7 +15,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{iccmpdfwf}
-    [2023/06/16 v2.06, driver class for journal ICCM]
+    [2023/06/19 v2.07, driver class for journal ICCM]
 
 %%  CLASS FILE CONTENT:
 %%  - VTeX SETUP
@@ -194,6 +194,7 @@
 %%  ======= ATTRIBUTES =======
 %%
 \def\frontmatter@style{%
+    \null
     \vskip12\p@
     }
 \def\title@style{\raggedrightmargin{0pc}}
