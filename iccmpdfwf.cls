@@ -15,7 +15,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{iccmpdfwf}
-    [2023/06/19 v2.07, driver class for journal ICCM]
+    [2023/06/20 v2.09, driver class for journal ICCM]
 
 %%  CLASS FILE CONTENT:
 %%  - VTeX SETUP
@@ -230,13 +230,25 @@
 %%  ======= PREAMBLE =======
 %%
 \def\pubyear#1{\gdef\@pubyear{#1}\gdef\@copyrightyear{#1}}
-    \def\@pubyear{2023}
+    \def\@pubyear{}
     \def\@copyrightyear{}
-\def\volume#1{\gdef\@volume{Volume\ #1}}
-    \gdef\@volume{10}
-\def\issue#1{\gdef\@issue{Number\ #1}}
-    \gdef\@issue{1}
-
+\def\volume#1{\gdef\@volume{#1}}
+    \gdef\@volume{}
+\def\issue#1{%
+    \gdef\@issue{Number\ #1}%
+    \ifx\@month\@empty
+        \ifx#11\relax
+            \gdef\@month{July}%
+        \else
+            \ifx#12\relax
+                \gdef\@month{December}%
+            \else
+                \gdef\@month{???}%
+            \fi
+        \fi
+    \fi
+    }
+    \gdef\@issue{}
 
 \newcounter{firstpage}
 \newcounter{lastpage}
@@ -354,7 +366,7 @@
     %  Writing PDF metadata to AUX file
     \write@pdfinfo{\hy@title}{\@title}%
     \write@pdfinfo{\hy@author}{\author@group}%
-    \write@pdfinfo{\hy@subject}{\journal@name\@copyrightyear\@volume\@issue\@pagerange}%
+    \write@pdfinfo{\hy@subject}{\journal@name\space \@copyrightyear\space Volume \@volume\space \@issue\space \@pagerange}%
     \write@pdfinfo{\hy@keywords}{\the\keywords@list}%
     \write\@mainaux{\string\gdef\string\author@num{\the\c@author}}%
     %  Generating PDF metadata
