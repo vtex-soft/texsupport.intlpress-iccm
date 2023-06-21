@@ -15,7 +15,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{iccmpdfwf}
-    [2023/06/20 v2.09, driver class for journal ICCM]
+    [2023/06/21 v2.11, driver class for journal ICCM]
 
 %%  CLASS FILE CONTENT:
 %%  - VTeX SETUP
@@ -98,6 +98,7 @@
 \def\@page@footskip  {16\p@}
 
 \usepackage[
+    nopdfinfo,
     nopagenumbers,
     papersize={\trim@width,\trim@height},
     textwidth=372\p@,
@@ -298,8 +299,7 @@
 \def\ps@copyright{%
    \let\@mkboth\@gobbletwo
    \def\@oddhead{\ifnum \thepage=1 % use different formatting for first page
-           {{\hspace{-2.2cm}\includegraphics[height=2cm]{head.pdf}}
-           }%
+           {\hspace{-2.2cm}\includegraphics[height=2cm]{head.pdf}}
        \else % use regular formatting for all other pages
            \centering\hfill\sc\@runtitle\hfill
                 \fi
@@ -427,6 +427,19 @@
 \def\revised@postfix{}
 \def\accepted@prefix{; accepted~}
 \def\accepted@postfix{}
+\def\interviewed@prefix{Interview held on~}
+\def\interviewed@postfix{}
+
+
+\def\interviewed#1{%
+    \def\@tempa{#1}%
+    \ifx\@tempa\@empty
+    \else
+        \gdef\@interviewed{#1}%
+        \gdef\history@exist{1}%
+    \fi
+    }
+\def\@interviewed{\@nil}
 
 \def\received#1{%
     \def\@tempa{#1}%
@@ -469,6 +482,10 @@
             \history@size
             \leavevmode
             \history@prefix
+            \ifx\@interviewed\empty@data
+            \else
+                \interviewed@prefix\@interviewed \interviewed@postfix
+            \fi
             \ifx\@received\empty@data
             \else
                 \received@prefix\@received \received@postfix
@@ -522,6 +539,7 @@
 %%
 %%  ======= TITLES =======
 %%
+\def\@title{}
 \def\title#1{%
     \gdef\@title{#1}%
     \vglue\title@skip
