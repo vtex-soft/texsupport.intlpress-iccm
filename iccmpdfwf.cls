@@ -15,7 +15,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{iccmpdfwf}
-    [2023/06/21 v2.11, driver class for journal ICCM]
+    [2023/06/22 v2.12, driver class for journal ICCM]
 
 %%  CLASS FILE CONTENT:
 %%  - VTeX SETUP
@@ -334,7 +334,7 @@
 \def\hb@IIIwd #1{\hbox to 0.33\textwidth{#1}}
 
 \def\pubmonth#1{\gdef\@month{#1}}
-\gdef\@month{June}
+\gdef\@month{}
 
 %%
 %%  >>>>>>> FRONTMATTER >>>>>>>
@@ -911,7 +911,7 @@
         \def\@svsechd{#4{\hskip #1\relax #5}}%
     \fi
     \ifnum\ssection@level=\@ne
-        \phantomsection\addcontentsline{toc}{section}{#5}%
+        \addcontentsline{toc}{section}{#5}%
     \fi
     \@xsect{#3}%
     }
