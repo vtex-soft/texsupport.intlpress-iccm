@@ -12,7 +12,7 @@
 ## About
 
 Author support service provides LaTeX style files and `*.tex` file templates designed for International Press journal
-[Notices of the International Congress of Chinese Mathematicians (ICCM Notices)](http://www.intlpress.com/ICCM/) articles.
+[Notices of the International Congress of Chinese Mathematicians (ICCM Notices)](http://www.intlpress.com/ICCM) articles.
 
 ## Package content
 
