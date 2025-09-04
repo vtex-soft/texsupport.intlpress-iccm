@@ -15,7 +15,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{iccmpdfwf}
-    [2023/06/22 v2.12, driver class for journal ICCM]
+    [2025/09/03 v2.14, driver class for journal ICCM]
 
 %%  CLASS FILE CONTENT:
 %%  - VTeX SETUP
@@ -299,7 +299,7 @@
 \def\ps@copyright{%
    \let\@mkboth\@gobbletwo
    \def\@oddhead{\ifnum \thepage=1 % use different formatting for first page
-           {\hspace{-2.2cm}\includegraphics[height=2cm]{head.pdf}}
+           {\hspace{-2.2cm}\includegraphics[height=2cm]{head}}
        \else % use regular formatting for all other pages
            \centering\hfill\sc\@runtitle\hfill
                 \fi
@@ -1099,7 +1099,7 @@
 \if@section@eqno
    \AtBeginDocument{%
        \@ifpackageloaded{amsmath}
-                        {\numberwithin{equation}{section}}
+                        {\numberwithin{equation}{section}\ifdefined\noaccents@\noaccents@\fi}
                         {\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}}%
        }
 \fi
