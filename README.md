@@ -5,7 +5,7 @@
 * [About](#about)
 * [Package content](#package-content)
 * [Setup](#setup)
-* [Recomended usage of `iccmpdfwf` package](#recomended-usage-of-iccmpdfwf-package)
+* [Recomended usage of `iccm` package](#recomended-usage-of-iccm-package)
 * [Submission](#submission)
 * [Bug reports](#bug-reports)
 
@@ -19,7 +19,7 @@ Author support service provides LaTeX style files and `*.tex` file templates des
 The following files are given in the repository (or directly in `*.zip` archive):
 
 * `head.pdf` - logo image
-* `iccmpdfwf.cls` - LaTeX style files designed for International Press *ICCM Notices* journal articles.
+* `iccm.cls` - LaTeX style files designed for International Press *ICCM Notices* journal articles.
   Please do not change them. These files are already loaded in the respective template files;
 * `iccm-template.tex` - topmatter template (should be used for article preparation);
 * `iccm-sample.tex` - journal sample article;
@@ -27,11 +27,11 @@ The following files are given in the repository (or directly in `*.zip` archive)
 
 ## Setup
 * Clone the repository or download the `*.zip` archive. Rename the package to `<your-project-name>`.
-* Install `iccmpdfwf.cls` in your TeX system (suggested directory: `iccm`).
+* Install `iccm.cls` in your TeX system (suggested directory: `iccm`).
 * Use the file `iccm-template.tex` to start your article as a template.
 * Use the file `iccm-sample.tex` as a reference for how to prepare a topmatter of your article.
 
-## Recommended usage of `iccmpdfwf` package
+## Recommended usage of `iccm` package
 
 Use `iccm-template.tex` as a template.
 
@@ -58,7 +58,7 @@ It provides numbered citations.
 
 In case author-year citation is required, provide the `authoryear` option:
 ```latex
-\documentclass[authoryear]{iccmpdfwf}
+\documentclass[authoryear]{iccm}
 ```
 All `natbib` package options can be provided in this way.
 
@@ -66,7 +66,7 @@ In case some other bibliography package is used
 which is not compatible with `natbib` package,
 one can disable the latter with the option `nonatbib`:
 ```latex
-\documentclass[nonatbib]{iccmpdfwf}
+\documentclass[nonatbib]{iccm}
 ```
 
 ### LaTeX document preamble content
@@ -74,7 +74,7 @@ one can disable the latter with the option `nonatbib`:
 The preamble of your LaTeX document should look like this:
 
 ```latex
-\documentclass{iccmpdfwf}
+\documentclass{iccm}
 
 \begin{document}
 

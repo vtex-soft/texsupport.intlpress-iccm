@@ -1,10 +1,7 @@
 %%
-%% This is file `iccmpdfwf.cls',
+%% This is file `iccm.cls',
 %% generated with the docstrip utility.
 %%
-%% The original source files were:
-%%
-%% iccmpdfwf.dtx  (with options: `class')
 %% 
 %% Copyright (C) 2016 by L. Tolen\.{e}, VTEX UAB
 %% Mokslininku 2a, LT-08412 Vilnius, Lithuania
@@ -14,8 +11,8 @@
 %% SOURCE: The initial source code was iccm_notes.cls.
 %%
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{iccmpdfwf}
-    [2025/09/03 v2.14, driver class for journal ICCM]
+\ProvidesClass{iccm}
+    [2026/02/02 v2.15, driver class for journal ICCM]
 
 %%  CLASS FILE CONTENT:
 %%  - VTeX SETUP
@@ -49,7 +46,7 @@
 %%
 \def\@vtexname{VTeX}
 \def\@vtexpublisher{intlpress}
-\def\@vtexproject{iccmpdfwf}
+\def\@vtexproject{iccm}
 \def\journal@name{ICCM Notices}
 
 \RequirePackage{etoolbox}
@@ -1239,4 +1236,4 @@
 
 \endinput
 %%
-%% End of file `iccmpdfwf.cls'.
+%% End of file `iccm.cls'.
