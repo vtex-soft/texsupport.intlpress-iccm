@@ -12,7 +12,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{iccm}
-    [2026/02/02 v2.15, driver class for journal ICCM]
+    [2026/09/28 v2.16, driver class for journal ICCM]
 
 %%  CLASS FILE CONTENT:
 %%  - VTeX SETUP
@@ -1142,7 +1142,7 @@
 
 %%  This splits MR... (...)
 \def\@MR#1 #2\relax#3{%
-    \href{http://www.ams.org/mathscinet-getitem?mr=#1}{\MRfixed{#3}}%
+    \href{https://mathscinet.ams.org/mathscinet-getitem?mr=#1}{\MRfixed{#3}}%
     }
 %%
 %%  ======= REFERENCES =======
